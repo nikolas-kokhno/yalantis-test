@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { filterUserByAlphabet } from "../utils/helpers";
+import { filterUserByAlphabet } from "../../utils/helpers";
+import { Loader } from "./Loader";
 import { EmployeesItem } from "./EmployeesItem";
 import { checkedUser } from "../../store/actions/users";
 
-export const EmployeesList = ({ users }) => {
+export const EmployeesList = ({ usersArray }) => {
   const dispatch = useDispatch();
-  const userByAlphabet = filterUserByAlphabet(users);
+  const userByAlphabet = filterUserByAlphabet(usersArray);
 
   const checkUser = (user) => {
     dispatch(checkedUser(user));
@@ -14,7 +15,9 @@ export const EmployeesList = ({ users }) => {
 
   return (
     <div className="employees__list">
-      {userByAlphabet &&
+      {usersArray.length === 0 ? (
+        <Loader />
+      ) : (
         userByAlphabet.map((alphabet) => (
           <div className="employees__list-letter" key={alphabet.letter}>
             <b>{alphabet.letter}</b>
@@ -30,6 +33,7 @@ export const EmployeesList = ({ users }) => {
                       key={item.id}
                       firstName={item.firstName}
                       lastName={item.lastName}
+                      checked={item.checked}
                       checkedUser={() => checkUser(item)}
                     />
                   ))
@@ -37,7 +41,8 @@ export const EmployeesList = ({ users }) => {
               </div>
             )}
           </div>
-        ))}
+        ))
+      )}
     </div>
   );
 };

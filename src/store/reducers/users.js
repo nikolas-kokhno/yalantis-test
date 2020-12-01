@@ -16,6 +16,12 @@ const users = (state = initialState, action) => {
         items: checkedStatus(action.payload),
       };
     }
+    case "GET_USERS_FROM_LOCAL": {
+      return {
+        ...state,
+        items: action.payload,
+      };
+    }
     case "CHECKED_USER": {
       return {
         ...state,

@@ -4,7 +4,7 @@ import { EmployeesList } from "../components/Employees/EmployeesList";
 import { BirthdayList } from "../components/EmployeesBirthday/BirthdayList";
 
 const EmployeesPage = () => {
-  const users = useSelector((data) => {
+  const usersData = useSelector((data) => {
     return data.users;
   });
 
@@ -15,7 +15,7 @@ const EmployeesPage = () => {
           <h3>Employees</h3>
         </div>
 
-        <EmployeesList users={users.items} />
+        <EmployeesList usersArray={usersData.items} />
       </div>
 
       <div className="employees__right">
@@ -23,7 +23,7 @@ const EmployeesPage = () => {
           <h3>Employees Birthday</h3>
         </div>
 
-        <BirthdayList users={users.items} />
+        <BirthdayList usersArray={usersData.items} />
       </div>
     </div>
   );
